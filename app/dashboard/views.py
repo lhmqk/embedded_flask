@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session
+from .. import socketio
 import paho.mqtt.client as mqtt
 import random
 
@@ -14,11 +15,6 @@ client_id = f'publish-{random.randint(0, 1000)}'
 # Flask Blueprint for the dashboard
 dashboard_blueprint = Blueprint('dashboard', __name__)
 
-# MQTT Client Setup
-client = mqtt.Client(client_id)
-client.username_pw_set(username, password)
-client.tls_set(ca_certs=ca_path)
-
 # Global variable to store messages
 messages = []
 
@@ -28,11 +24,16 @@ def on_connect(client, userdata, flags, rc):
         client.subscribe(topic)
 
 def on_message(client, userdata, msg):
-    messages.append(msg.payload.decode())
+    message = msg.payload.decode()
+    messages.append(message)
+    socketio.emit('mqtt_message', {'message': message})
 
 # Set the callbacks and start the MQTT loop
+client = mqtt.Client(client_id)
 client.on_connect = on_connect
 client.on_message = on_message
+client.username_pw_set(username, password)
+client.tls_set(ca_certs=ca_path)
 client.connect(broker, port)
 client.loop_start()
 
