@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="dashboard-container">
+    <h1>MQTT Dashboard</h1>
+    <form action="{{ url_for('dashboard.dashboard') }}" method="POST">
+        <input type="text" name="message" placeholder="Enter message to publish">
+        <button type="submit">Publish</button>
+    </form>
+    {% if last_message %}
+    <p>Last published message: {{ last_message }}</p>
+    {% endif %}
+    <ul id="messages">
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='dashboard.js') }}"></script>
+</div>
+{% endblock %}
