@@ -2,15 +2,7 @@ from flask import Blueprint, render_template, request, redirect, url_for, sessio
 from .. import socketio
 import paho.mqtt.client as mqtt
 import random
-
-# MQTT Configuration
-broker = 'v4e74e78.ala.us-east-1.emqxsl.com'
-port = 8883
-topic = "/testtopic/1"
-username = 'lhmqk'
-password = 'Khai16082002'
-ca_path = '/home/lhmqk/Documents/Obisidian/BK-213/Thesis/flask_test/emqxsl-ca.crt'
-client_id = f'publish-{random.randint(0, 1000)}'
+from config import MQTT_BROKER, MQTT_PORT, MQTT_TOPIC, MQTT_USERNAME, MQTT_PASSWORD, MQTT_CA_PATH
 
 # Flask Blueprint for the dashboard
 dashboard_blueprint = Blueprint('dashboard', __name__)
@@ -21,20 +13,21 @@ messages = []
 # MQTT Callbacks
 def on_connect(client, userdata, flags, rc):
     if rc == 0:
-        client.subscribe(topic)
+        client.subscribe(MQTT_TOPIC)
 
 def on_message(client, userdata, msg):
     message = msg.payload.decode()
     messages.append(message)
     socketio.emit('mqtt_message', {'message': message})
 
-# Set the callbacks and start the MQTT loop
+# MQTT Setup
+client_id = f'publish-{random.randint(0, 1000)}'
 client = mqtt.Client(client_id)
 client.on_connect = on_connect
 client.on_message = on_message
-client.username_pw_set(username, password)
-client.tls_set(ca_certs=ca_path)
-client.connect(broker, port)
+client.username_pw_set(MQTT_USERNAME, MQTT_PASSWORD)
+client.tls_set(ca_certs=MQTT_CA_PATH)
+client.connect(MQTT_BROKER, MQTT_PORT)
 client.loop_start()
 
 # Dashboard route
@@ -42,7 +35,7 @@ client.loop_start()
 def dashboard():
     if request.method == 'POST':
         message = request.form['message']
-        client.publish(topic, message)
+        client.publish(MQTT_TOPIC, message)
         # Store the message in the session to display after redirect
         session['last_message'] = message
         # Redirect to the same page but with a GET request
