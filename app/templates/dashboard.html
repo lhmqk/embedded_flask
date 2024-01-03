@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="col-sm-12">
-  <div class="dashboard-container">
+  <!-- <div class="dashboard-container">
     <h1>MQTT Dashboard</h1>
     <form action="{{ url_for('dashboard.dashboard') }}" method="POST">
         <input type="text" name="message" placeholder="Enter message to publish">
@@ -18,22 +18,10 @@
     </ul>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='dashboard.js') }}"></script>
-</div>
+</div> -->
   <div class="home-tab">
     <div class="d-sm-flex align-items-center justify-content-between border-bottom">
       <ul class="nav nav-tabs" role="tablist">
-        <li class="nav-item">
-          <a class="nav-link active ps-0" id="home-tab" data-bs-toggle="tab" href="#overview" role="tab" aria-controls="overview" aria-selected="true">Overview</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#audiences" role="tab" aria-selected="false">Audiences</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="contact-tab" data-bs-toggle="tab" href="#demographics" role="tab" aria-selected="false">Demographics</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link border-0" id="more-tab" data-bs-toggle="tab" href="#more" role="tab" aria-selected="false">More</a>
-        </li>
       </ul>
       <div>
         <div class="btn-wrapper">
@@ -47,35 +35,35 @@
       <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview"> 
         <div class="row">
           <div class="col-sm-12">
-            <div class="statistics-details d-flex align-items-center justify-content-between">
-              <div>
-                <p class="statistics-title">Bounce Rate</p>
-                <h3 class="rate-percentage">32.53%</h3>
+            <div class="statistics-details d-flex align-items-center justify-content-center justify-content-md-between flex-wrap">
+              <div class="mx-2 mx-md-0">
+                <p class="statistics-title">Total Entries</p>
+                <h3 class="rate-percentage">1,584</h3>
                 <p class="text-danger d-flex"><i class="mdi mdi-menu-down"></i><span>-0.5%</span></p>
               </div>
-              <div>
-                <p class="statistics-title">Page Views</p>
-                <h3 class="rate-percentage">7,682</h3>
+              <div class="mx-2 mx-md-0">
+                <p class="statistics-title">Total Exits</p>
+                <h3 class="rate-percentage">1,452</h3>
                 <p class="text-success d-flex"><i class="mdi mdi-menu-up"></i><span>+0.1%</span></p>
               </div>
-              <div>
-                <p class="statistics-title">New Sessions</p>
-                <h3 class="rate-percentage">68.8</h3>
+              <div class="mx-2 mx-md-0">
+                <p class="statistics-title">Ocupancy Ratio</p>
+                <h3 class="rate-percentage">105.6%</h3>
                 <p class="text-danger d-flex"><i class="mdi mdi-menu-down"></i><span>68.8</span></p>
               </div>
-              <div class="d-none d-md-block">
-                <p class="statistics-title">Avg. Time on Site</p>
-                <h3 class="rate-percentage">2m:35s</h3>
+              <div class="mx-2 mx-md-0">
+                <p class="statistics-title">Busiest Hour</p>
+                <h3 class="rate-percentage">14:00 - 15:00</h3>
                 <p class="text-success d-flex"><i class="mdi mdi-menu-down"></i><span>+0.8%</span></p>
               </div>
-              <div class="d-none d-md-block">
-                <p class="statistics-title">New Sessions</p>
-                <h3 class="rate-percentage">68.8</h3>
+              <div class="mx-2 mx-md-0">
+                <p class="statistics-title">Busiest Day</p>
+                <h3 class="rate-percentage">Monday</h3>
                 <p class="text-danger d-flex"><i class="mdi mdi-menu-down"></i><span>68.8</span></p>
               </div>
-              <div class="d-none d-md-block">
-                <p class="statistics-title">Avg. Time on Site</p>
-                <h3 class="rate-percentage">2m:35s</h3>
+              <div class="mx-2 mx-md-0">
+                <p class="statistics-title">Average Stay</p>
+                <h3 class="rate-percentage">00:19:43</h3>
                 <p class="text-success d-flex"><i class="mdi mdi-menu-down"></i><span>+0.8%</span></p>
               </div>
             </div>
@@ -89,12 +77,13 @@
                   <div class="card-body">
                     <div class="d-sm-flex justify-content-between align-items-start">
                       <div>
-                        <h4 class="card-title card-title-dash">Performance Line Chart</h4>
-                        <h5 class="card-subtitle card-subtitle-dash">Lorem Ipsum is simply dummy text of the printing</h5>
+                        <h4 class="card-title card-title-dash">Ocupancy Line Chart</h4>
+                        <h5 class="card-subtitle card-subtitle-dash">The ocupancy status is currently stable</h5>
                       </div>
                       <div id="performance-line-legend"></div>
                     </div>
                     <div class="chartjs-wrapper mt-5">
+                      <!-- Edit in 'app/static/js/dashboard.js' -->
                       <canvas id="performaneLine"></canvas>
                     </div>
                   </div>

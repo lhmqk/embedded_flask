@@ -36,8 +36,6 @@ def dashboard():
     if request.method == 'POST':
         message = request.form['message']
         client.publish(MQTT_TOPIC, message)
-        # Store the message in the session to display after redirect
-        session['last_message'] = message
         # Redirect to the same page but with a GET request
         return redirect(url_for('dashboard.dashboard'))
     # Retrieve the last message from the session if available

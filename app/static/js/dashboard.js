@@ -11,9 +11,9 @@
       saleGradientBg2.addColorStop(0, 'rgba(0, 208, 255, 0.19)');
       saleGradientBg2.addColorStop(1, 'rgba(0, 208, 255, 0.03)');
       var salesTopData = {
-          labels: ["SUN","sun", "MON", "mon", "TUE","tue", "WED", "wed", "THU", "thu", "FRI", "fri", "SAT"],
+          labels: ["00:00", "02:00", "04:00", "06:00", "08:00", "10:00", "12:00", "14:00", "16:00", "18:00", "20:00", "22:00", "24:00"],
           datasets: [{
-              label: 'This week',
+              label: 'Entries',
               data: [50, 110, 60, 290, 200, 115, 130, 170, 90, 210, 240, 280, 200],
               backgroundColor: saleGradientBg,
               borderColor: [
@@ -27,7 +27,7 @@
               pointBackgroundColor: ['#1F3BB3)', '#1F3BB3', '#1F3BB3', '#1F3BB3','#1F3BB3)', '#1F3BB3', '#1F3BB3', '#1F3BB3','#1F3BB3)', '#1F3BB3', '#1F3BB3', '#1F3BB3','#1F3BB3)'],
               pointBorderColor: ['#fff','#fff','#fff','#fff','#fff','#fff','#fff','#fff','#fff','#fff','#fff','#fff','#fff',],
           },{
-            label: 'Last week',
+            label: 'Exits',
             data: [30, 150, 190, 250, 120, 150, 130, 20, 30, 15, 40, 95, 180],
             backgroundColor: saleGradientBg2,
             borderColor: [
@@ -81,11 +81,11 @@
             var text = [];
             text.push('<div class="chartjs-legend"><ul>');
             for (var i = 0; i < chart.data.datasets.length; i++) {
-              console.log(chart.data.datasets[i]); // see what's inside the obj.
-              text.push('<li>');
-              text.push('<span style="background-color:' + chart.data.datasets[i].borderColor + '">' + '</span>');
-              text.push(chart.data.datasets[i].label);
-              text.push('</li>');
+                console.log(chart.data.datasets[i]); // see what's inside the obj.
+                text.push('<li>');
+                text.push('<span style="background-color:' + chart.data.datasets[i].borderColor + '">' + '</span>');
+                text.push(chart.data.datasets[i].label);
+                text.push('</li>');
             }
             text.push('</ul></div>');
             return text.join("");
